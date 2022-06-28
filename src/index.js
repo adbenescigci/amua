@@ -1,61 +1,97 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import App from "./App";
-
 import "./index.css";
 
-//Public
-const Intro = () => {
-  return <div> Intro </div>;
-};
+import Login from "./pages/Public/Login/Login";
+import Game from "./pages/Private/Game/Game";
+import HowItWorks from "./pages/Public/HowItWorks/HowItWorks";
+import Dashboard from "./pages/Private/Dashboard/Dashboard";
+import Intro from "./pages/Public/Intro/Intro";
+import Faq from "./pages/Public/FAQ/Faq";
+import PrivacyPolicy from "./pages/Public/PrivacyPolicy/PrivacyPolicy";
+import TermsOfUse from "./pages/Public/TermsOfUse/TermsOfUse";
 
-//Private
-const Dashboard = () => {
-  return <div> dashboard</div>;
-};
-const Game = () => {
-  return <div> Game</div>;
-};
+let AuthContext = React.createContext();
 
-//Login
-const Login = () => {
-  return <div> Game</div>;
-};
+function AuthProvider({ children }) {
+  let [user, setUser] = React.useState("user");
 
-//Footer Links
-const HowItWorks = () => {
-  return <div> How it works </div>;
-};
-const Faq = () => {
-  return <div> Faq </div>;
-};
-const PrivacyPolicy = () => {
-  return <div> Privacy policy</div>;
-};
-const TermsOfUse = () => {
-  return <div> terms of use </div>;
-};
+  let signin = (newUser, callback) => {
+    setUser(newUser);
+    callback();
+  };
+
+  let signout = (callback) => {
+    setUser(null);
+    callback();
+  };
+
+  let value = { user, signin, signout };
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+function useAuth() {
+  return React.useContext(AuthContext);
+}
+
+function RequireAuth({ children }) {
+  let auth = useAuth();
+  let location = useLocation();
+
+  if (!auth.user) {
+    // Redirect them to the /login page, but save the current location they were
+    // trying to go to when they were redirected. This allows us to send them
+    // along to that page after they login, which is a nicer user experience
+    // than dropping them off on the home page.
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
+
+  return children;
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" exact={true} element={<Intro />} />
-        <Route element={<App />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/faq" element={<Faq />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-of-use/" element={<TermsOfUse />} />
-          <Route path="/login" element={<Login />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact={true} element={<Intro />} />
+          <Route element={<App />}>
+            <Route path="/login" element={<Login />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/faq" element={<Faq />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-of-use/" element={<TermsOfUse />} />
 
-          <Route path="/hub" element={<Dashboard />} />
-          <Route path="/game/:id" element={<Game />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+            <Route
+              path="/hub"
+              element={
+                <RequireAuth>
+                  <Dashboard />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/game/:id"
+              element={
+                <RequireAuth>
+                  <Game />
+                </RequireAuth>
+              }
+            />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   </React.StrictMode>
 );
 
