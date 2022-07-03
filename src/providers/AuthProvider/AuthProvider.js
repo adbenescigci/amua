@@ -3,16 +3,16 @@ import React from "react";
 export let AuthContext = React.createContext();
 
 const AuthProvider = ({ children }) => {
-  let [user, setUser] = React.useState("user");
+  let [user, setUser] = React.useState("test");
 
-  let signin = (newUser, callback) => {
+  let signin = (newUser) => {
     setUser(newUser);
-    callback();
+    console.log("signin");
   };
 
-  let signout = (callback) => {
+  let signout = () => {
     setUser(null);
-    callback();
+    console.log("signout");
   };
 
   let value = { user, signin, signout };
