@@ -16,7 +16,7 @@ export const gamesList = [
     game_icon: "GiHockey",
     date_icon: "FcCalendar",
     title: "Ice Hockey",
-    subTitle: "Ages:18+",
+    subTitle: "Ice Hockey, Ages:18+",
     date: "Tue, Jun 28",
     hour: "1:00 p.m",
     duration: "90",

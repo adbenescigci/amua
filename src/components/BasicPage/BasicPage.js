@@ -13,7 +13,7 @@ const styles = {
   },
   outlet: {
     minHeight: "calc(100vh + 400px)",
-    backgroundColor: "#eeeeee",
+    backgroundColor: "#f5f5f5",
   },
 };
 
