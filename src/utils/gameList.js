@@ -10,6 +10,16 @@ export const gamesList = [
     duration: "80",
     price: "6.77",
     location: "Waterio Memorial Recreation Complex - Activity Court (Indoor)",
+    whiteTeam: {
+      1: { name: "test w 1" },
+      2: { name: "test w 2" },
+      4: { name: "test w 4" },
+    },
+    blackTeam: {
+      1: { name: "test b 1" },
+      2: { name: "test b 2" },
+      4: { name: "test b 4" },
+    },
   },
   {
     id: 2,
@@ -22,6 +32,16 @@ export const gamesList = [
     duration: "90",
     price: "88.5",
     location: "Mohowk 4 ice - Icve Rink (Indoor)",
+    whiteTeam: {
+      4: { name: "test w 4" },
+      6: { name: "test w 6" },
+      9: { name: "test w 9" },
+    },
+    blackTeam: {
+      4: { name: "test b 4" },
+      6: { name: "test b 6" },
+      9: { name: "test b 9" },
+    },
   },
   {
     id: 3,
@@ -34,6 +54,16 @@ export const gamesList = [
     duration: "50",
     price: "6.77",
     location: "RIM Park-Field House 2 (Indoor)",
+    whiteTeam: {
+      10: { name: "test w 10" },
+      11: { name: "test w 11" },
+      12: { name: "test w 12" },
+    },
+    blackTeam: {
+      10: { name: "test b 10" },
+      11: { name: "test b 11" },
+      12: { name: "test b 12" },
+    },
   },
   {
     id: 4,
@@ -46,6 +76,10 @@ export const gamesList = [
     duration: "90",
     price: "6.77",
     location: "Waterloo Memorial Recreation Complex-Activity Court (Indoor)",
+    whiteTeam: { 4: { name: "test w 4" } },
+    blackTeam: {
+      4: { name: "test b 4" },
+    },
   },
   {
     id: 5,
@@ -58,5 +92,11 @@ export const gamesList = [
     duration: "50",
     price: "6.77",
     location: "RIM Park - Field House 3 (Indoor)",
+    whiteTeam: {
+      9: { name: "test w 9" },
+    },
+    blackTeam: {
+      9: { name: "test b 9" },
+    },
   },
 ];
