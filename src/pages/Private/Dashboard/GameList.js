@@ -2,9 +2,9 @@ import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import SportsBasketballIcon from "@mui/icons-material/SportsBasketball";
+import { useNavigate } from "react-router-dom";
 
-import { gamesList } from "../../../utils/moc";
+import { gamesList } from "../../../utils/gameList";
 import { iconList } from "../../../utils/iconList";
 
 const style = () => ({
@@ -41,10 +41,16 @@ const style = () => ({
 });
 
 const GameList = () => {
+  let navigate = useNavigate();
+
+  const navigateGame = (id) => {
+    navigate(`../game/${id}`, { replace: true });
+  };
+
   return (
     <>
       {gamesList.map((el, index) => (
-        <Card sx={style().card} key={index}>
+        <Card onClick={() => navigateGame(el.id)} sx={style().card} key={index}>
           <React.Fragment>
             <Grid container rowSpacing={1} direction="column">
               <Grid
