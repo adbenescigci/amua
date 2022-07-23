@@ -30,14 +30,7 @@ const Game = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const getBlackTeam = () => {
-  //   let result;
-  //   for (let i = 0; i < selectedGame?.numberOfPlayers / 2; i++) {
-  //     result += <p> t </p>;
-  //   }
-  //   console.log(result);
-  //   return result;
-  // };
+  const getBlackTeam = () => {};
 
   return (
     <Box sx={style().box}>
@@ -75,6 +68,7 @@ const Game = () => {
             <Grid container spacing={2}>
               <Grid item container direction="column" xs={12} sm={6}>
                 black
+                {getBlackTeam()}
                 {selectedGame &&
                   Object.values(selectedGame.blackTeam).map((el, index) => (
                     <Chip
