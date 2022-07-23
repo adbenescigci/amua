@@ -7,12 +7,10 @@ const AuthProvider = ({ children }) => {
 
   let signin = (newUser) => {
     setUser(newUser);
-    console.log("signin");
   };
 
   let signout = () => {
     setUser(null);
-    console.log("signout");
   };
 
   let value = { user, signin, signout };
